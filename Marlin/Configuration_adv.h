@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "AnyCubic/i3 Mega"
+
 /**
  * Configuration_adv.h
  *
@@ -506,9 +508,9 @@
  * The fan turns on automatically whenever any driver is enabled and turns
  * off (or reduces to idle speed) shortly after drivers are turned off.
  */
-//#define USE_CONTROLLER_FAN
+#define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
-  //#define CONTROLLER_FAN_PIN -1           // Set a custom pin for the controller fan
+  #define CONTROLLER_FAN_PIN FAN1_PIN    // Set a custom pin for the controller fan
   //#define CONTROLLER_FAN_USE_Z_ONLY       // With this option only the Z axis is considered
   //#define CONTROLLER_FAN_IGNORE_Z         // Ignore Z stepper. Useful when stepper timeout is disabled.
   #define CONTROLLERFAN_SPEED_MIN         0 // (0-255) Minimum speed. (If set below this value the fan is turned off.)
@@ -605,7 +607,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN FAN2_PIN
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -747,7 +749,7 @@
 //
 // For Z set the number of stepper drivers
 //
-#define NUM_Z_STEPPER_DRIVERS 1   // (1-4) Z options change based on how many
+#define NUM_Z_STEPPER_DRIVERS 2   // (1-4) Z options change based on how many
 
 #if NUM_Z_STEPPER_DRIVERS > 1
   // Enable if Z motor direction signals are the opposite of Z1
@@ -755,7 +757,7 @@
   //#define INVERT_Z3_VS_Z_DIR
   //#define INVERT_Z4_VS_Z_DIR
 
-  //#define Z_MULTI_ENDSTOPS
+  #define Z_MULTI_ENDSTOPS
   #if ENABLED(Z_MULTI_ENDSTOPS)
     #define Z2_USE_ENDSTOP          _XMAX_
     #define Z2_ENDSTOP_ADJUSTMENT   0
@@ -871,7 +873,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  //#define BLTOUCH_DELAY 500
+  #define BLTOUCH_DELAY 500
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -928,7 +930,7 @@
  * Z Steppers Auto-Alignment
  * Add the G34 command to align multiple Z steppers using a bed probe.
  */
-//#define Z_STEPPER_AUTO_ALIGN
+#define Z_STEPPER_AUTO_ALIGN
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
   // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
   // If not defined, probe limits will be used.
@@ -1064,7 +1066,7 @@
  * See https://hydraraptor.blogspot.com/2010/12/frequency-limit.html
  * Use M201 F<freq> G<min%> to change limits at runtime.
  */
-//#define XY_FREQUENCY_LIMIT      10 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
+#define XY_FREQUENCY_LIMIT      10 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
 #ifdef XY_FREQUENCY_LIMIT
   #define XY_FREQUENCY_MIN_PERCENT 5 // (percent) Minimum FR percentage to apply. Set with M201 G<min%>.
 #endif
@@ -1311,7 +1313,7 @@
   #endif
 
   // Include a page of printer information in the LCD Main Menu
-  //#define LCD_INFO_MENU
+  //define LCD_INFO_MENU
   #if ENABLED(LCD_INFO_MENU)
     //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
   #endif
@@ -1404,243 +1406,243 @@
   #endif
 #endif
 
-#if ENABLED(SDSUPPORT)
-  /**
-   * SD Card SPI Speed
-   * May be required to resolve "volume init" errors.
-   *
-   * Enable and set to SPI_HALF_SPEED, SPI_QUARTER_SPEED, or SPI_EIGHTH_SPEED
-   *  otherwise full speed will be applied.
-   *
-   * :['SPI_HALF_SPEED', 'SPI_QUARTER_SPEED', 'SPI_EIGHTH_SPEED']
-   */
-  //#define SD_SPI_SPEED SPI_HALF_SPEED
+// #if ENABLED(SDSUPPORT)
+//   /**
+//    * SD Card SPI Speed
+//    * May be required to resolve "volume init" errors.
+//    *
+//    * Enable and set to SPI_HALF_SPEED, SPI_QUARTER_SPEED, or SPI_EIGHTH_SPEED
+//    *  otherwise full speed will be applied.
+//    *
+//    * :['SPI_HALF_SPEED', 'SPI_QUARTER_SPEED', 'SPI_EIGHTH_SPEED']
+//    */
+//   //#define SD_SPI_SPEED SPI_HALF_SPEED
 
-  // The standard SD detect circuit reads LOW when media is inserted and HIGH when empty.
-  // Enable this option and set to HIGH if your SD cards are incorrectly detected.
-  //#define SD_DETECT_STATE HIGH
+//   // The standard SD detect circuit reads LOW when media is inserted and HIGH when empty.
+//   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
+//   //#define SD_DETECT_STATE HIGH
 
-  //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
-  //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+//   //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
+//   //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
 
-  //#define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
+//   //#define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
 
-  #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
+//   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
-  #define SD_FINISHED_STEPPERRELEASE true   // Disable steppers when SD Print is finished
-  #define SD_FINISHED_RELEASECOMMAND "M84"  // Use "M84XYE" to keep Z enabled so your bed stays in place
+//   #define SD_FINISHED_STEPPERRELEASE true   // Disable steppers when SD Print is finished
+//   #define SD_FINISHED_RELEASECOMMAND "M84"  // Use "M84XYE" to keep Z enabled so your bed stays in place
 
-  // Reverse SD sort to show "more recent" files first, according to the card's FAT.
-  // Since the FAT gets out of order with usage, SDCARD_SORT_ALPHA is recommended.
-  #define SDCARD_RATHERRECENTFIRST
+//   // Reverse SD sort to show "more recent" files first, according to the card's FAT.
+//   // Since the FAT gets out of order with usage, SDCARD_SORT_ALPHA is recommended.
+//   #define SDCARD_RATHERRECENTFIRST
 
-  #define SD_MENU_CONFIRM_START             // Confirm the selected SD file before printing
+//   #define SD_MENU_CONFIRM_START             // Confirm the selected SD file before printing
 
-  //#define NO_SD_AUTOSTART                 // Remove auto#.g file support completely to save some Flash, SRAM
-  //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
+//   //#define NO_SD_AUTOSTART                 // Remove auto#.g file support completely to save some Flash, SRAM
+//   //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
 
-  //#define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
+//   //#define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
 
-  //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
+//   //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
 
-  #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
+//   #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
 
-  #if ENABLED(PRINTER_EVENT_LEDS)
-    #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
-  #endif
+//   #if ENABLED(PRINTER_EVENT_LEDS)
+//     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
+//   #endif
 
-  /**
-   * Continue after Power-Loss (Creality3D)
-   *
-   * Store the current state to the SD Card at the start of each layer
-   * during SD printing. If the recovery file is found at boot time, present
-   * an option on the LCD screen to continue the print from the last-known
-   * point in the file.
-   */
-  //#define POWER_LOSS_RECOVERY
-  #if ENABLED(POWER_LOSS_RECOVERY)
-    #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
-    //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
-    //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
-    //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
-    //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
-    //#define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
-    //#define POWER_LOSS_PULLDOWN
-    //#define POWER_LOSS_PURGE_LEN   20 // (mm) Length of filament to purge on resume
-    //#define POWER_LOSS_RETRACT_LEN 10 // (mm) Length of filament to retract on fail. Requires backup power.
+//   /**
+//    * Continue after Power-Loss (Creality3D)
+//    *
+//    * Store the current state to the SD Card at the start of each layer
+//    * during SD printing. If the recovery file is found at boot time, present
+//    * an option on the LCD screen to continue the print from the last-known
+//    * point in the file.
+//    */
+//   //#define POWER_LOSS_RECOVERY
+//   #if ENABLED(POWER_LOSS_RECOVERY)
+//     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
+//     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
+//     //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
+//     //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
+//     //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
+//     //#define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
+//     //#define POWER_LOSS_PULLDOWN
+//     //#define POWER_LOSS_PURGE_LEN   20 // (mm) Length of filament to purge on resume
+//     //#define POWER_LOSS_RETRACT_LEN 10 // (mm) Length of filament to retract on fail. Requires backup power.
 
-    // Without a POWER_LOSS_PIN the following option helps reduce wear on the SD card,
-    // especially with "vase mode" printing. Set too high and vases cannot be continued.
-    #define POWER_LOSS_MIN_Z_CHANGE 0.05 // (mm) Minimum Z change before saving power-loss data
+//     // Without a POWER_LOSS_PIN the following option helps reduce wear on the SD card,
+//     // especially with "vase mode" printing. Set too high and vases cannot be continued.
+//     #define POWER_LOSS_MIN_Z_CHANGE 0.05 // (mm) Minimum Z change before saving power-loss data
 
-    // Enable if Z homing is needed for proper recovery. 99.9% of the time this should be disabled!
-    //#define POWER_LOSS_RECOVER_ZHOME
-    #if ENABLED(POWER_LOSS_RECOVER_ZHOME)
-      //#define POWER_LOSS_ZHOME_POS { 0, 0 } // Safe XY position to home Z while avoiding objects on the bed
-    #endif
-  #endif
+//     // Enable if Z homing is needed for proper recovery. 99.9% of the time this should be disabled!
+//     //#define POWER_LOSS_RECOVER_ZHOME
+//     #if ENABLED(POWER_LOSS_RECOVER_ZHOME)
+//       //#define POWER_LOSS_ZHOME_POS { 0, 0 } // Safe XY position to home Z while avoiding objects on the bed
+//     #endif
+//   #endif
 
-  /**
-   * Sort SD file listings in alphabetical order.
-   *
-   * With this option enabled, items on SD cards will be sorted
-   * by name for easier navigation.
-   *
-   * By default...
-   *
-   *  - Use the slowest -but safest- method for sorting.
-   *  - Folders are sorted to the top.
-   *  - The sort key is statically allocated.
-   *  - No added G-code (M34) support.
-   *  - 40 item sorting limit. (Items after the first 40 are unsorted.)
-   *
-   * SD sorting uses static allocation (as set by SDSORT_LIMIT), allowing the
-   * compiler to calculate the worst-case usage and throw an error if the SRAM
-   * limit is exceeded.
-   *
-   *  - SDSORT_USES_RAM provides faster sorting via a static directory buffer.
-   *  - SDSORT_USES_STACK does the same, but uses a local stack-based buffer.
-   *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
-   *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
-   */
-  //#define SDCARD_SORT_ALPHA
+//   /**
+//    * Sort SD file listings in alphabetical order.
+//    *
+//    * With this option enabled, items on SD cards will be sorted
+//    * by name for easier navigation.
+//    *
+//    * By default...
+//    *
+//    *  - Use the slowest -but safest- method for sorting.
+//    *  - Folders are sorted to the top.
+//    *  - The sort key is statically allocated.
+//    *  - No added G-code (M34) support.
+//    *  - 40 item sorting limit. (Items after the first 40 are unsorted.)
+//    *
+//    * SD sorting uses static allocation (as set by SDSORT_LIMIT), allowing the
+//    * compiler to calculate the worst-case usage and throw an error if the SRAM
+//    * limit is exceeded.
+//    *
+//    *  - SDSORT_USES_RAM provides faster sorting via a static directory buffer.
+//    *  - SDSORT_USES_STACK does the same, but uses a local stack-based buffer.
+//    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
+//    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
+//    */
+//   //#define SDCARD_SORT_ALPHA
 
-  // SD Card Sorting options
-  #if ENABLED(SDCARD_SORT_ALPHA)
-    #define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
-    #define FOLDER_SORTING     -1     // -1=above  0=none  1=below
-    #define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 G-code.
-    #define SDSORT_USES_RAM    false  // Pre-allocate a static array for faster pre-sorting.
-    #define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-    #define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
-    #define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
-    #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
-                                      // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
-  #endif
+//   // SD Card Sorting options
+//   #if ENABLED(SDCARD_SORT_ALPHA)
+//     #define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
+//     #define FOLDER_SORTING     -1     // -1=above  0=none  1=below
+//     #define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 G-code.
+//     #define SDSORT_USES_RAM    false  // Pre-allocate a static array for faster pre-sorting.
+//     #define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
+//     #define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+//     #define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
+//     #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
+//                                       // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
+//   #endif
 
-  // Allow international symbols in long filenames. To display correctly, the
-  // LCD's font must contain the characters. Check your selected LCD language.
-  //#define UTF_FILENAME_SUPPORT
+//   // Allow international symbols in long filenames. To display correctly, the
+//   // LCD's font must contain the characters. Check your selected LCD language.
+//   //#define UTF_FILENAME_SUPPORT
 
-  // This allows hosts to request long names for files and folders with M33
-  //#define LONG_FILENAME_HOST_SUPPORT
+//   // This allows hosts to request long names for files and folders with M33
+//   //#define LONG_FILENAME_HOST_SUPPORT
 
-  // Enable this option to scroll long filenames in the SD card menu
-  //#define SCROLL_LONG_FILENAMES
+//   // Enable this option to scroll long filenames in the SD card menu
+//   //#define SCROLL_LONG_FILENAMES
 
-  // Leave the heaters on after Stop Print (not recommended!)
-  //#define SD_ABORT_NO_COOLDOWN
+//   // Leave the heaters on after Stop Print (not recommended!)
+//   //#define SD_ABORT_NO_COOLDOWN
 
-  /**
-   * This option allows you to abort SD printing when any endstop is triggered.
-   * This feature must be enabled with "M540 S1" or from the LCD menu.
-   * To have any effect, endstops must be enabled during SD printing.
-   */
-  //#define SD_ABORT_ON_ENDSTOP_HIT
+//   /**
+//    * This option allows you to abort SD printing when any endstop is triggered.
+//    * This feature must be enabled with "M540 S1" or from the LCD menu.
+//    * To have any effect, endstops must be enabled during SD printing.
+//    */
+//   //#define SD_ABORT_ON_ENDSTOP_HIT
 
-  /**
-   * This option makes it easier to print the same SD Card file again.
-   * On print completion the LCD Menu will open with the file selected.
-   * You can just click to start the print, or navigate elsewhere.
-   */
-  //#define SD_REPRINT_LAST_SELECTED_FILE
+//   /**
+//    * This option makes it easier to print the same SD Card file again.
+//    * On print completion the LCD Menu will open with the file selected.
+//    * You can just click to start the print, or navigate elsewhere.
+//    */
+//   //#define SD_REPRINT_LAST_SELECTED_FILE
 
-  /**
-   * Auto-report SdCard status with M27 S<seconds>
-   */
-  //#define AUTO_REPORT_SD_STATUS
+//   /**
+//    * Auto-report SdCard status with M27 S<seconds>
+//    */
+//   //#define AUTO_REPORT_SD_STATUS
 
-  /**
-   * Support for USB thumb drives using an Arduino USB Host Shield or
-   * equivalent MAX3421E breakout board. The USB thumb drive will appear
-   * to Marlin as an SD card.
-   *
-   * The MAX3421E can be assigned the same pins as the SD card reader, with
-   * the following pin mapping:
-   *
-   *    SCLK, MOSI, MISO --> SCLK, MOSI, MISO
-   *    INT              --> SD_DETECT_PIN [1]
-   *    SS               --> SDSS
-   *
-   * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
-   */
-  //#define USB_FLASH_DRIVE_SUPPORT
-  #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
-    /**
-     * USB Host Shield Library
-     *
-     * - UHS2 uses no interrupts and has been production-tested
-     *   on a LulzBot TAZ Pro with a 32-bit Archim board.
-     *
-     * - UHS3 is newer code with better USB compatibility. But it
-     *   is less tested and is known to interfere with Servos.
-     *   [1] This requires USB_INTR_PIN to be interrupt-capable.
-     */
-    //#define USE_UHS2_USB
-    //#define USE_UHS3_USB
+//   /**
+//    * Support for USB thumb drives using an Arduino USB Host Shield or
+//    * equivalent MAX3421E breakout board. The USB thumb drive will appear
+//    * to Marlin as an SD card.
+//    *
+//    * The MAX3421E can be assigned the same pins as the SD card reader, with
+//    * the following pin mapping:
+//    *
+//    *    SCLK, MOSI, MISO --> SCLK, MOSI, MISO
+//    *    INT              --> SD_DETECT_PIN [1]
+//    *    SS               --> SDSS
+//    *
+//    * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
+//    */
+//   //#define USB_FLASH_DRIVE_SUPPORT
+//   #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
+//     /**
+//      * USB Host Shield Library
+//      *
+//      * - UHS2 uses no interrupts and has been production-tested
+//      *   on a LulzBot TAZ Pro with a 32-bit Archim board.
+//      *
+//      * - UHS3 is newer code with better USB compatibility. But it
+//      *   is less tested and is known to interfere with Servos.
+//      *   [1] This requires USB_INTR_PIN to be interrupt-capable.
+//      */
+//     //#define USE_UHS2_USB
+//     //#define USE_UHS3_USB
 
-    /**
-     * Native USB Host supported by some boards (USB OTG)
-     */
-    //#define USE_OTG_USB_HOST
+//     /**
+//      * Native USB Host supported by some boards (USB OTG)
+//      */
+//     //#define USE_OTG_USB_HOST
 
-    #if DISABLED(USE_OTG_USB_HOST)
-      #define USB_CS_PIN    SDSS
-      #define USB_INTR_PIN  SD_DETECT_PIN
-    #endif
-  #endif
+//     #if DISABLED(USE_OTG_USB_HOST)
+//       #define USB_CS_PIN    SDSS
+//       #define USB_INTR_PIN  SD_DETECT_PIN
+//     #endif
+//   #endif
 
-  /**
-   * When using a bootloader that supports SD-Firmware-Flashing,
-   * add a menu item to activate SD-FW-Update on the next reboot.
-   *
-   * Requires ATMEGA2560 (Arduino Mega)
-   *
-   * Tested with this bootloader:
-   *   https://github.com/FleetProbe/MicroBridge-Arduino-ATMega2560
-   */
-  //#define SD_FIRMWARE_UPDATE
-  #if ENABLED(SD_FIRMWARE_UPDATE)
-    #define SD_FIRMWARE_UPDATE_EEPROM_ADDR    0x1FF
-    #define SD_FIRMWARE_UPDATE_ACTIVE_VALUE   0xF0
-    #define SD_FIRMWARE_UPDATE_INACTIVE_VALUE 0xFF
-  #endif
+//   /**
+//    * When using a bootloader that supports SD-Firmware-Flashing,
+//    * add a menu item to activate SD-FW-Update on the next reboot.
+//    *
+//    * Requires ATMEGA2560 (Arduino Mega)
+//    *
+//    * Tested with this bootloader:
+//    *   https://github.com/FleetProbe/MicroBridge-Arduino-ATMega2560
+//    */
+//   //#define SD_FIRMWARE_UPDATE
+//   #if ENABLED(SD_FIRMWARE_UPDATE)
+//     #define SD_FIRMWARE_UPDATE_EEPROM_ADDR    0x1FF
+//     #define SD_FIRMWARE_UPDATE_ACTIVE_VALUE   0xF0
+//     #define SD_FIRMWARE_UPDATE_INACTIVE_VALUE 0xFF
+//   #endif
 
-  /**
-   * Enable this option if you have more than ~3K of unused flash space.
-   * Marlin will embed all settings in the firmware binary as compressed data.
-   * Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
-   * See docs/ConfigEmbedding.md for details on how to use 'mc-apply.py'.
-   */
-  //#define CONFIGURATION_EMBEDDING
+//   /**
+//    * Enable this option if you have more than ~3K of unused flash space.
+//    * Marlin will embed all settings in the firmware binary as compressed data.
+//    * Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
+//    * See docs/ConfigEmbedding.md for details on how to use 'mc-apply.py'.
+//    */
+//   //#define CONFIGURATION_EMBEDDING
 
-  // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-  //#define BINARY_FILE_TRANSFER
+//   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
+//   //#define BINARY_FILE_TRANSFER
 
-  /**
-   * Set this option to one of the following (or the board's defaults apply):
-   *
-   *           LCD - Use the SD drive in the external LCD controller.
-   *       ONBOARD - Use the SD drive on the control board.
-   *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
-   *
-   * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
-   */
-  //#define SDCARD_CONNECTION LCD
+//   /**
+//    * Set this option to one of the following (or the board's defaults apply):
+//    *
+//    *           LCD - Use the SD drive in the external LCD controller.
+//    *       ONBOARD - Use the SD drive on the control board.
+//    *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
+//    *
+//    * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
+//    */
+//   //#define SDCARD_CONNECTION LCD
 
-  // Enable if SD detect is rendered useless (e.g., by using an SD extender)
-  //#define NO_SD_DETECT
+//   // Enable if SD detect is rendered useless (e.g., by using an SD extender)
+//   //#define NO_SD_DETECT
 
-  // Multiple volume support - EXPERIMENTAL.
-  //#define MULTI_VOLUME
-  #if ENABLED(MULTI_VOLUME)
-    #define VOLUME_SD_ONBOARD
-    #define VOLUME_USB_FLASH_DRIVE
-    #define DEFAULT_VOLUME SV_SD_ONBOARD
-    #define DEFAULT_SHARED_VOLUME SV_USB_FLASH_DRIVE
-  #endif
+//   // Multiple volume support - EXPERIMENTAL.
+//   //#define MULTI_VOLUME
+//   #if ENABLED(MULTI_VOLUME)
+//     #define VOLUME_SD_ONBOARD
+//     #define VOLUME_USB_FLASH_DRIVE
+//     #define DEFAULT_VOLUME SV_SD_ONBOARD
+//     #define DEFAULT_SHARED_VOLUME SV_USB_FLASH_DRIVE
+//   #endif
 
-#endif // SDSUPPORT
+// #endif // SDSUPPORT
 
 /**
  * By default an onboard SD card reader may be shared as a USB mass-
@@ -1989,7 +1991,7 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
   #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
@@ -2256,8 +2258,8 @@
 // @section serial
 
 // The ASCII buffer for serial input
-#define MAX_CMD_SIZE 96
-#define BUFSIZE 4
+#define MAX_CMD_SIZE 128
+#define BUFSIZE 8
 
 // Transmission to Host Buffer Size
 // To save 386 bytes of PROGMEM (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
@@ -2266,13 +2268,13 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 0
+#define TX_BUFFER_SIZE 4
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
 // To use flow control, set this buffer size to at least 1024 bytes.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-//#define RX_BUFFER_SIZE 1024
+#define RX_BUFFER_SIZE 256
 
 #if RX_BUFFER_SIZE >= 1024
   // Enable to have the controller send XON/XOFF control characters to
@@ -2304,7 +2306,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 /**
  * Realtime Reporting (requires EMERGENCY_PARSER)
@@ -2482,14 +2484,14 @@
  *
  * Enable PARK_HEAD_ON_PAUSE to add the G-code M125 Pause and Park.
  */
-//#define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
-  #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
+  #define PAUSE_PARK_RETRACT_FEEDRATE         50  // (mm/s) Initial retract feedrate.
   #define PAUSE_PARK_RETRACT_LENGTH            2  // (mm) Initial retract.
                                                   // This short retract is done immediately, before parking the nozzle.
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     10  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH      100  // (mm) The length of filament for a complete unload.
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      555  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
@@ -2498,16 +2500,16 @@
                                                   // 0 to disable start loading and skip to fast load only
   #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE   6  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH     0  // (mm) Load length of filament, from extruder gear to nozzle.
+  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   538  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
   #define ADVANCED_PAUSE_PURGE_FEEDRATE        3  // (mm/s) Extrude feedrate (after loading). Should be slower than load feedrate.
-  #define ADVANCED_PAUSE_PURGE_LENGTH         50  // (mm) Length to extrude after loading.
+  #define ADVANCED_PAUSE_PURGE_LENGTH         60  // (mm) Length to extrude after loading.
                                                   //   Set to 0 for manual extrusion.
                                                   //   Filament can be extruded repeatedly from the Filament Change menu
                                                   //   until extrusion is consistent, and to purge old filament.
-  #define ADVANCED_PAUSE_RESUME_PRIME          0  // (mm) Extra distance to prime nozzle after returning from park.
+  #define ADVANCED_PAUSE_RESUME_PRIME          2  // (mm) Extra distance to prime nozzle after returning from park.
   //#define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
@@ -2522,7 +2524,7 @@
   //#define FILAMENT_CHANGE_RESUME_ON_INSERT      // Automatically continue / load filament when runout sensor is triggered again.
   //#define PAUSE_REHEAT_FAST_RESUME              // Reduce number of waits by not prompting again post-timeout before continuing.
 
-  //#define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
+  #define PARK_HEAD_ON_PAUSE                      // Park the nozzle during pause and filament change.
   //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
   //#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
@@ -2975,9 +2977,6 @@
   //#define CHOPPER_TIMING_Z2 CHOPPER_TIMING_Z
   //#define CHOPPER_TIMING_Z3 CHOPPER_TIMING_Z
   //#define CHOPPER_TIMING_Z4 CHOPPER_TIMING_Z
-  //#define CHOPPER_TIMING_I  CHOPPER_TIMING
-  //#define CHOPPER_TIMING_J  CHOPPER_TIMING
-  //#define CHOPPER_TIMING_K  CHOPPER_TIMING
   //#define CHOPPER_TIMING_E  CHOPPER_TIMING        // For Extruders (override below)
   //#define CHOPPER_TIMING_E1 CHOPPER_TIMING_E
   //#define CHOPPER_TIMING_E2 CHOPPER_TIMING_E
@@ -3955,10 +3954,10 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PAUSE_M76
-  //#define HOST_PROMPT_SUPPORT
+  #define HOST_PROMPT_SUPPORT
   //#define HOST_START_MENU_ITEM      // Add a menu item that tells the host to start
   //#define HOST_SHUTDOWN_MENU_ITEM   // Add a menu item that tells the host to shut down
 #endif
