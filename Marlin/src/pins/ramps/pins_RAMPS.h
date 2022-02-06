@@ -81,37 +81,37 @@
 //
 // Limit Switches
 //
-#ifndef X_STOP_PIN
-  #ifndef X_MIN_PIN
-    #define X_MIN_PIN                          3
-  #endif
-  #ifndef X_MAX_PIN
-    #define X_MAX_PIN                          2
-  #endif
-#endif
-#ifndef Y_STOP_PIN
-  #ifndef Y_MIN_PIN
-    #define Y_MIN_PIN                         14
-  #endif
-  #ifndef Y_MAX_PIN
-    #define Y_MAX_PIN                         15
-  #endif
-#endif
+// #ifndef X_STOP_PIN
+//   #ifndef X_MIN_PIN
+//     #define X_MIN_PIN                          3
+//   #endif
+//   #ifndef X_MAX_PIN
+//     #define X_MAX_PIN                          2
+//   #endif
+// #endif
+// #ifndef Y_STOP_PIN
+//   #ifndef Y_MIN_PIN
+//     #define Y_MIN_PIN                         14
+//   #endif
+//   #ifndef Y_MAX_PIN
+//     #define Y_MAX_PIN                         15
+//   #endif
+// #endif
 #ifndef Z_STOP_PIN
   #ifndef Z_MIN_PIN
-    #define Z_MIN_PIN                         18
+    #define Z_MIN_PIN                         19
   #endif
   #ifndef Z_MAX_PIN
-    #define Z_MAX_PIN                         19
+    #define Z_MAX_PIN                         18
   #endif
 #endif
 
 //
 // Z Probe (when not Z_MIN_PIN)
 //
-#ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN                     32
-#endif
+// #ifndef Z_MIN_PROBE_PIN
+//   #define Z_MIN_PROBE_PIN                     1
+// #endif
 
 //
 // Steppers
@@ -467,8 +467,8 @@
  */
 #ifndef EXP1_03_PIN
   #define EXP1_03_PIN                AUX4_13_PIN
-  #define EXP1_04_PIN                AUX4_14_PIN
-  #define EXP1_05_PIN                AUX4_15_PIN
+  #define EXP1_04_PIN                AUX4_12_PIN
+  #define EXP1_05_PIN                AUX4_11_PIN
   #define EXP1_06_PIN                AUX4_16_PIN
   #define EXP1_07_PIN                AUX4_18_PIN
   #define EXP1_08_PIN                AUX4_17_PIN
@@ -478,9 +478,9 @@
   #define EXP2_03_PIN                AUX4_07_PIN
   #define EXP2_04_PIN                AUX3_07_PIN
   #define EXP2_05_PIN                AUX3_05_PIN
-  #define EXP2_06_PIN                AUX4_11_PIN
+  #define EXP2_06_PIN                AUX4_14_PIN
   #define EXP2_07_PIN                AUX3_03_PIN
-  #define EXP2_08_PIN                AUX4_12_PIN
+  #define EXP2_08_PIN                AUX4_15_PIN
   #define EXP2_09_PIN                AUX3_04_PIN
   #define EXP2_10_PIN                AUX3_06_PIN
 #endif

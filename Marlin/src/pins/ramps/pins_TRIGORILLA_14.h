@@ -52,7 +52,7 @@
   #define MOSFET_C_PIN                         8  // BED
 #elif FET_ORDER_EFB
   #if DISABLED(ANYCUBIC_LCD_CHIRON)
-    #define MOSFET_C_PIN                       8
+    #define MOSFET_C_PIN                       45 //changed HET BED connection to HEATER1 for use with external mosfet
   #else
     #define MOSFET_C_PIN                      45
   #endif
@@ -96,10 +96,12 @@
 //   #define X_MAX_PIN                           43
 //   #define Y_STOP_PIN                          19
 // #elif EITHER(ANYCUBIC_LCD_CHIRON, ANYCUBIC_LCD_I3MEGA)
-  #define Y_STOP_PIN                          3
-  #define Z2_MIN_PIN                          43
-  #ifndef Z_MIN_PROBE_PIN
-    #define Z_MIN_PROBE_PIN                    19
+  #define Y_MIN_PIN                          2
+  #define X_MIN_PIN                          3
+  #define Z_MIN_PIN                          19
+ // #define Z2_MIN_PIN                          43
+ //// #ifndef Z_MIN_PROBE_PIN
+  //#define Z_MIN_PROBE_PIN                    19
  // #endif
  // #ifndef FIL_RUNOUT_PIN
   //   #if ENABLED(ANYCUBIC_LCD_CHIRON)
@@ -110,7 +112,7 @@
   // #endif
  // #define BEEPER_PIN                          31
  // #define SD_DETECT_PIN                       49
-#endif
+//#endif
 
 #define X_SERIAL_TX_PIN                   4
 #define X_SERIAL_RX_PIN                   50
@@ -126,6 +128,11 @@
 
 #define E0_SERIAL_TX_PIN                  6
 #define E0_SERIAL_RX_PIN                  12
+
+//RepRap Discount Full Graphics controller remap
+
+//#define BTN_EN1              27 // formerly  EXP2_08_PIN 
+//#define BTN_EN2              25 // formerly EXP2_06_PIN
 
 #include "pins_RAMPS.h"
 
