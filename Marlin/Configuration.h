@@ -611,8 +611,8 @@
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
+  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
+  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
@@ -1119,9 +1119,9 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(I3MEGA_HAS_BLTOUCH)
-  #define BLTOUCH
-#endif
+
+#define BLTOUCH
+
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1213,7 +1213,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 26, 0, -1.54 }
+#define NOZZLE_TO_PROBE_OFFSET { 26, 0, -1.53 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1273,7 +1273,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 3
 #define EXTRA_PROBING    1
 
 /**
@@ -1302,9 +1302,8 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(I3MEGA_HAS_BLTOUCH)
-  #define Z_MIN_PROBE_REPEATABILITY_TEST
-#endif
+#define Z_MIN_PROBE_REPEATABILITY_TEST
+
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1324,15 +1323,15 @@
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
   //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
-//#define PROBING_FANS_OFF          // Turn fans off when probing
-//#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
+#define PROBING_FANS_OFF          // Turn fans off when probing
+#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
 //#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
 //#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
-  #define PROBING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
+ // #define PROBING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
   #define PROBING_BED_TEMP     50
 #endif
 
@@ -1463,7 +1462,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  //#define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
 #endif
 
 /**
@@ -1581,13 +1580,9 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(I3MEGA_HAS_BLTOUCH)
-  #define AUTO_BED_LEVELING_BILINEAR
-#endif
-//#define AUTO_BED_LEVELING_UBL
-#if DISABLED(I3MEGA_HAS_BLTOUCH)
-  #define MESH_BED_LEVELING
-#endif
+
+#define AUTO_BED_LEVELING_BILINEAR
+
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
@@ -1595,14 +1590,14 @@
  * leveling immediately after G28.
  */
 //#define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
+#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
  */
-//#define PREHEAT_BEFORE_LEVELING
+#define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
+  //#define LEVELING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
   #define LEVELING_BED_TEMP     50
 #endif
 
@@ -1611,7 +1606,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -1652,7 +1647,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
+  #define GRID_MAX_POINTS_X 5
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Probe along the Y axis, advancing X after each column
@@ -1668,7 +1663,7 @@
     // Experimental Subdivision of the grid by Catmull-Rom method.
     // Synthesizes intermediate points to produce a more detailed mesh.
     //
-    //#define ABL_BILINEAR_SUBDIVISION
+    #define ABL_BILINEAR_SUBDIVISION
     #if ENABLED(ABL_BILINEAR_SUBDIVISION)
       // Number of subdivisions between probe points
       #define BILINEAR_SUBDIVISIONS 3
@@ -2215,8 +2210,8 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
-//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER

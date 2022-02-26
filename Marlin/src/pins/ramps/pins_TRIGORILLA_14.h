@@ -40,43 +40,20 @@
 //
 // PWM FETS
 //
-#if EITHER(FET_ORDER_EEF, FET_ORDER_EEB)
-  #define MOSFET_B_PIN                        45  // HEATER1
-#elif FET_ORDER_EFB
-  #define MOSFET_B_PIN                         9  // FAN0
-#else
-  #define MOSFET_B_PIN                         7  // FAN1
-#endif
 
-#if FET_ORDER_EEB
-  #define MOSFET_C_PIN                         8  // BED
-#elif FET_ORDER_EFB
-  #if DISABLED(ANYCUBIC_LCD_CHIRON)
-    #define MOSFET_C_PIN                       45 //changed HET BED connection to HEATER1 for use with external mosfet
-  #else
-    #define MOSFET_C_PIN                      45
-  #endif
-#else                                             // EEF, EFF
-  #define MOSFET_C_PIN                         9
-#endif
+#define MOSFET_B_PIN                         9  // FAN0
 
-#if FET_ORDER_EEB
-  #define FAN_PIN                              9  // Override pin 4 in pins_RAMPS.h
-#endif
+
+#define MOSFET_C_PIN                       45 //changed HET BED connection to HEATER1 for use with external mosfet
 
 //
 // Heaters / Fans
 //
-#if ANY(FET_ORDER_EEF, FET_ORDER_EEB, FET_ORDER_EFB)
-  #define FAN1_PIN                             7
-#endif
-#define FAN2_PIN                              44
-#ifndef E0_AUTO_FAN_PIN
-  #define E0_AUTO_FAN_PIN                     44  // Used in Anycubic Kossel example config
-#endif
-#if ENABLED(ANYCUBIC_LCD_I3MEGA)
-  #define CONTROLLER_FAN_PIN                   7
-#endif
+
+#define FAN1_PIN                             8
+//#define FAN2_PIN                              -1
+#define E0_AUTO_FAN_PIN                     7  // Used in Anycubic Kossel example config
+
 
 //
 // AnyCubic standard pin mappings
